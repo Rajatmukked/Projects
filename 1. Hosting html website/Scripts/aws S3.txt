@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+sudo su
+dnf update -y
+dnf install httpd.x86_64 -y
+cd /var/www/html
+Aws s3 syn c s3://Website /var/www/html
+unzip main.zip
+cp -r Website-main/* /var/www/html/
+rm -rf Website-main main.zip
+systemctl start httpd
+systemctl enable httpd
